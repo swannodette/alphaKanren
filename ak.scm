@@ -31,16 +31,18 @@
     ((_ v lit kt kf) (if (equal? v (quote lit)) kt kf))))
 
 ;(define h
-;    (lambda (x y)
-;      (pmatch `(,x . ,y)
-;        ((,a . ,b) (guard (number? a) (number? b)) (+ a b))
-;        ((_ . ,c) (guard (number? c)) (* c c))
-;        (else (* x x)))))
+;  (lambda (x y)
+;    (pmatch `(,x . ,y)
+;      ((,a . ,b) (guard (number? a) (number? b)) (+ a b))
+;      ((_ . ,c) (guard (number? c)) (* c c))
+;      (else (* x x)))))
 
 (define-syntax mv-let
   (syntax-rules ()
     ((_ ((x ...) e) b0 b ...)
      (pmatch e ((x ...) b0 b ...)))))
+
+;(mv-let ((,x ,y ,z) (list 1 2 3)) (+ x y z))
 
 (define var
   (lambda (ignore)
